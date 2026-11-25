@@ -54,7 +54,7 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Express tag */}
         <div className="absolute top-2 right-2 bg-white/95 backdrop-blur-xs px-1.5 py-0.5 rounded text-[9px] sm:text-[10px] font-black text-gray-900 flex items-center gap-0.5 shadow-xs">
           <Zap className="w-2.5 h-2.5 text-[#FF7A00] fill-[#FF7A00]" />
-          <span>30m</span>
+          <span>15m</span>
         </div>
 
         {/* Bottom Weight & Pieces */}

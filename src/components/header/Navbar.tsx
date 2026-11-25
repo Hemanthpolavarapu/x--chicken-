@@ -76,7 +76,7 @@ export function Navbar() {
                   </span>
                 </div>
                 <span className="ml-1 text-[11px] font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded border border-green-200 flex items-center gap-1">
-                  <Zap className="w-3 h-3 fill-current" /> 30m
+                  <Zap className="w-3 h-3 fill-current" /> 15m
                 </span>
               </button>
             </div>
@@ -107,15 +107,6 @@ export function Navbar() {
 
             {/* Action Buttons */}
             <div className="flex items-center gap-3">
-              {/* Store Status Pill */}
-              <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200/80 text-xs font-semibold">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <span>Store Hub Live</span>
-              </div>
-
               {/* Support Call */}
               <a
                 href="tel:1800123456"
@@ -166,7 +157,7 @@ export function Navbar() {
                 <ChevronDown className="w-3 h-3 text-gray-500" />
               </button>
               <span className="shrink-0 text-[11px] font-bold text-green-700 bg-green-100/70 px-2 py-0.5 rounded flex items-center gap-1">
-                <Zap className="w-3 h-3 fill-current" /> 30m
+                <Zap className="w-3 h-3 fill-current" /> 15m
               </span>
             </div>
 

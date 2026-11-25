@@ -24,7 +24,7 @@ export function HeroBanner() {
     {
       tag: "100% STORE FRESH",
       title: "Cut Today. Never Frozen.",
-      sub: "Direct from our local store butchery to your kitchen in 30 mins.",
+      sub: "Direct from our local store butchery to your kitchen in 15 mins.",
       highlight: "Zero thaw water loss. 100% tender meat.",
       badgeColor: "bg-[#D11243]",
       gradient: "from-[#D11243] via-[#B71C1C] to-[#880E4F]",
@@ -33,7 +33,7 @@ export function HeroBanner() {
     },
     {
       tag: "EXPRESS SPEED",
-      title: "Store To Door In 30 Mins",
+      title: "Store To Door In 15 Mins",
       sub: "Dispatched from neighborhood chilled store hubs (0°C – 4°C).",
       highlight: "Live tracking with insulated cold-chain packs.",
       badgeColor: "bg-[#FF7A00]",
@@ -85,7 +85,7 @@ export function HeroBanner() {
                   {current.tag}
                 </span>
                 <span className="text-[11px] text-white/80 font-semibold hidden sm:inline-flex items-center gap-1">
-                  <Zap className="w-3 h-3 text-amber-300 fill-amber-300" /> 30m Express
+                  <Zap className="w-3 h-3 text-amber-300 fill-amber-300" /> 15m Express
                 </span>
               </div>
 
@@ -131,18 +131,21 @@ export function HeroBanner() {
           </div>
         </div>
 
-        {/* Mobile-Native Fast Category Story Circles (Like Licious & Zepto) */}
-        <div className="space-y-2 pt-1">
-          <div className="flex items-center justify-between px-1">
+        {/* Mobile-Native Fast Category Story Circles (Centered On Both Sides) */}
+        <div className="space-y-3 pt-2">
+          <div className="flex items-center justify-between px-2 sm:px-4 max-w-5xl mx-auto">
             <span className="text-xs font-black text-gray-900 tracking-tight uppercase">
               Explore Fresh Cuts
             </span>
-            <span className="text-[11px] font-bold text-[#D11243] flex items-center gap-0.5 cursor-pointer" onClick={scrollToProducts}>
+            <span
+              className="text-[11px] font-bold text-[#D11243] flex items-center gap-0.5 cursor-pointer hover:underline"
+              onClick={scrollToProducts}
+            >
               See All ({CATEGORIES.length}) <ChevronRight className="w-3 h-3" />
             </span>
           </div>
 
-          <div className="flex items-center gap-3 sm:gap-4 overflow-x-auto pb-1 scrollbar-none no-scrollbar pt-1">
+          <div className="flex items-center justify-start sm:justify-center gap-3 sm:gap-6 overflow-x-auto pb-2 scrollbar-none no-scrollbar pt-1 mx-auto max-w-5xl px-2">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat.id}
@@ -158,7 +161,7 @@ export function HeroBanner() {
                     <Flame className="w-4 h-4 fill-[#D11243]" />
                   </div>
                 </div>
-                <span className="text-[11px] sm:text-xs font-bold text-gray-800 text-center max-w-[70px] truncate leading-tight group-hover:text-[#D11243]">
+                <span className="text-[11px] sm:text-xs font-bold text-gray-800 text-center max-w-[80px] sm:max-w-[90px] truncate leading-tight group-hover:text-[#D11243]">
                   {cat.name}
                 </span>
               </button>

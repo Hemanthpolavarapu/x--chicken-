@@ -8,7 +8,6 @@ import { NeverFrozenComparison } from "@/components/freshness/NeverFrozenCompari
 import { FourStepProcess } from "@/components/freshness/FourStepProcess";
 import { DailyOffersBanner } from "@/components/banner/DailyOffersBanner";
 import { CustomerReviews } from "@/components/reviews/CustomerReviews";
-import { ChickenFaq } from "@/components/faq/ChickenFaq";
 import { Footer } from "@/components/footer/Footer";
 import { QuickViewModal } from "@/components/products/QuickViewModal";
 import { CartDrawer } from "@/components/cart/CartDrawer";
@@ -45,9 +44,6 @@ export default function HomePage() {
 
         {/* 9. Verified Buyer Reviews */}
         <CustomerReviews />
-
-        {/* 10. Frequently Asked Questions */}
-        <ChickenFaq />
       </main>
 
       {/* 11. Comprehensive Brand Footer */}

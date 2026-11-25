@@ -26,7 +26,7 @@ export function Footer() {
             </div>
             <div>
               <h4 className="text-xs font-bold text-white uppercase tracking-wider">
-                30-Min Express
+                15-Min Express
               </h4>
               <p className="text-[11px] text-gray-400">Direct from local store hub</p>
             </div>

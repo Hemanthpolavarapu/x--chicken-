@@ -22,7 +22,7 @@ export function MobileFloatingCart() {
           <div className="text-left leading-tight">
             <span className="text-xs font-black block">₹{subtotal} Subtotal</span>
             <span className="text-[10px] text-white/80 font-medium flex items-center gap-1">
-              <Zap className="w-2.5 h-2.5 fill-current text-amber-300" /> 30m Store Express
+              <Zap className="w-2.5 h-2.5 fill-current text-amber-300" /> 15m Store Express
             </span>
           </div>
         </div>

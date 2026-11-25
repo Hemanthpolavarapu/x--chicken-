@@ -5,7 +5,7 @@ import { CartProvider } from "@/context/CartContext";
 export const metadata: Metadata = {
   title: "X-Chicken | 100% Fresh, Never Frozen Express Chicken Delivery",
   description:
-    "Direct from local store to your kitchen in 30 mins. Strictly 100% fresh, cut-to-order poultry with zero frozen storage, zero preservatives, and farm-fresh taste.",
+    "Direct from local store to your kitchen in 15 mins. Strictly 100% fresh, cut-to-order poultry with zero frozen storage, zero preservatives, and farm-fresh taste.",
   keywords: [
     "X-Chicken",
     "Express chicken delivery",

@@ -32,9 +32,9 @@ export function FourStepProcess() {
     {
       num: "04",
       icon: Home,
-      title: "30-Min Insulated Delivery",
-      description: "Packed in food-grade insulated thermal ice-packs and rushed to your kitchen in under 30-45 minutes.",
-      badge: "⚡ Under 30 Mins",
+      title: "15-Min Insulated Delivery",
+      description: "Packed in food-grade insulated thermal ice-packs and rushed to your kitchen in under 15-20 minutes.",
+      badge: "⚡ Under 15 Mins",
       accent: "#0E9F6E",
     },
   ];

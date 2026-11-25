@@ -76,7 +76,7 @@ export function Navbar() {
                   </span>
                 </div>
                 <span className="ml-1 text-[11px] font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded border border-green-200 flex items-center gap-1">
-                  <Zap className="w-3 h-3 fill-current" /> 15m
+                  <Zap className="w-3 h-3 fill-current" /> 15 min
                 </span>
               </button>
             </div>
@@ -157,7 +157,7 @@ export function Navbar() {
                 <ChevronDown className="w-3 h-3 text-gray-500" />
               </button>
               <span className="shrink-0 text-[11px] font-bold text-green-700 bg-green-100/70 px-2 py-0.5 rounded flex items-center gap-1">
-                <Zap className="w-3 h-3 fill-current" /> 15m
+                <Zap className="w-3 h-3 fill-current" /> 15 min
               </span>
             </div>
 

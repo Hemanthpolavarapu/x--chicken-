@@ -85,7 +85,7 @@ export function HeroBanner() {
                   {current.tag}
                 </span>
                 <span className="text-[11px] text-white/80 font-semibold hidden sm:inline-flex items-center gap-1">
-                  <Zap className="w-3 h-3 text-amber-300 fill-amber-300" /> 15m Express
+                  <Zap className="w-3 h-3 text-amber-300 fill-amber-300" /> 15 min Express
                 </span>
               </div>
 

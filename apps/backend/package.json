@@ -1,0 +1,32 @@
+{
+  "name": "@x-chicken/backend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --webpack -p 4000",
+    "build": "next build --webpack",
+    "start": "next start -p 4000",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint",
+    "provision:admin": "node scripts/provision-admin.mjs",
+    "provision:test-vendor": "node scripts/provision-test-vendor.mjs",
+    "cleanup:test-orders": "node scripts/cleanup-test-orders.mjs"
+  },
+  "dependencies": {
+    "@x-chicken/shared": "workspace:*",
+    "bcryptjs": "^3.0.2",
+    "mongodb": "^7.9.1",
+    "next": "16.4.6",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.6",
+    "typescript": "^5"
+  }
+}

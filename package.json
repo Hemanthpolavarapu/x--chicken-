@@ -1,30 +1,16 @@
 {
-  "name": "x-chicken",
-  "version": "0.1.0",
+  "name": "x-chicken-monorepo",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --webpack -p 3000",
-    "build": "next build --webpack",
-    "start": "next start -p 3000",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "lucide-react": "^1.78.0",
-    "next": "16.4.6",
-    "react": "19.3.0",
-    "react-dom": "19.3.0"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4.3.5",
-    "@tailwindcss/turbopack": "4.3.3",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.4.6",
-    "postcss": "^8.5.33",
-    "tailwindcss": "4.3.3",
-    "typescript": "^5"
+    "dev": "pnpm --parallel dev",
+    "dev:frontend": "pnpm --filter @x-chicken/frontend dev",
+    "dev:backend": "pnpm --filter @x-chicken/backend dev",
+    "build": "pnpm --filter @x-chicken/backend build && pnpm --filter @x-chicken/frontend build",
+    "build:frontend": "pnpm --filter @x-chicken/frontend build",
+    "build:backend": "pnpm --filter @x-chicken/backend build",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint"
   },
   "packageManager": "pnpm@11.6.0"
 }

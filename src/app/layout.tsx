@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description:
     "Direct from local store to your kitchen in 15 mins. Strictly 100% fresh, cut-to-order poultry with zero frozen storage, zero preservatives, and farm-fresh taste.",
   keywords: [
-    "X-Chicken",
+    "Chiken",
     "Express chicken delivery",
     "fresh chicken online",
     "no frozen chicken",

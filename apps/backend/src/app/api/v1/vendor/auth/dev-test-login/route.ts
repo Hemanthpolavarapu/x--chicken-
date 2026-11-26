@@ -16,11 +16,32 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 function assertDevTestVendorEnabled() {
-  if (
-    process.env.NODE_ENV === "production" ||
-    process.env.ENABLE_DEV_TEST_VENDOR !== "true"
-  ) {
+  const previewTestVendorEnabled =
+    process.env.VERCEL_ENV === "preview" &&
+    process.env.ENABLE_DEV_TEST_VENDOR === "true";
+  const localTestVendorEnabled =
+    process.env.VERCEL_ENV !== "production" &&
+    process.env.NODE_ENV !== "production" &&
+    process.env.ENABLE_DEV_TEST_VENDOR === "true";
+
+  if (!previewTestVendorEnabled && !localTestVendorEnabled) {
     throw new ApiError("NOT_FOUND", "Not found", 404);
+  }
+
+  if (previewTestVendorEnabled) {
+    const appDatabase = process.env.MONGODB_DB_NAME?.trim();
+    const previewDatabase = process.env.DEV_TEST_VENDOR_DB_NAME?.trim();
+    const productionDatabase = process.env.PRODUCTION_MONGODB_DB_NAME?.trim();
+
+    if (
+      !appDatabase ||
+      !previewDatabase ||
+      !productionDatabase ||
+      appDatabase !== previewDatabase ||
+      previewDatabase === productionDatabase
+    ) {
+      throw new ApiError("NOT_FOUND", "Not found", 404);
+    }
   }
 }
 

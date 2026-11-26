@@ -1,18 +1,28 @@
 export type ChickenCategory =
   | "all"
   | "curry-cut"
-  | "biryani"
-  | "boneless"
-  | "starters"
-  | "desi-country"
-  | "mince"
-  | "whole-specialty";
+  | "boneless-mince"
+  | "speciality-cuts"
+  | "offals"
+  | "combos";
+
+export interface ProductVariant {
+  id: string;
+  label: string;
+  netWeight: string;
+  grossWeight: string;
+  pieces: string;
+  serves: string;
+  price: number;
+  originalPrice: number;
+  discountPercentage: number;
+}
 
 export interface Product {
   id: string;
   name: string;
   hindiName?: string;
-  category: ChickenCategory;
+  category: Exclude<ChickenCategory, "all">;
   shortDescription: string;
   fullDescription: string;
   price: number;
@@ -30,12 +40,18 @@ export interface Product {
   idealFor: string[];
   freshnessBatch: string;
   temperatureAtStore: string;
+  variants: ProductVariant[];
+  chickenType: "Broiler" | "Country";
+  boneType: "Bone-in" | "Boneless" | "Partly Boneless";
+  cutType: string;
+  packSizeGroup: "Under 500g" | "500g – 1 kg" | "Above 1 kg";
 }
 
 export interface CartItem {
   product: Product;
   quantity: number;
   selectedCutPreference?: string;
+  selectedVariant?: ProductVariant;
 }
 
 export interface CategoryItem {
@@ -44,6 +60,7 @@ export interface CategoryItem {
   tagline: string;
   icon: string;
   itemCount: number;
+  image: string;
 }
 
 export interface Testimonial {

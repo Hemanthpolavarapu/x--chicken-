@@ -1,13 +1,13 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { Product, CartItem } from "@/types";
+import { Product, CartItem, ProductVariant } from "@/types";
 
 interface CartContextType {
   items: CartItem[];
-  addItem: (product: Product, cutPreference?: string) => void;
-  removeItem: (productId: string) => void;
-  updateQuantity: (productId: string, delta: number) => void;
+  addItem: (product: Product, cutPreference?: string, variant?: ProductVariant) => void;
+  removeItem: (productId: string, variantId?: string) => void;
+  updateQuantity: (productId: string, delta: number, variantId?: string) => void;
   clearCart: () => void;
   totalItems: number;
   subtotal: number;
@@ -30,6 +30,12 @@ interface CartContextType {
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
+
+const matchesCartItem = (item: CartItem, productId: string, variantId?: string) => {
+  if (item.product.id !== productId) return false;
+  if (!variantId) return true;
+  return (item.selectedVariant?.id || item.product.variants[0]?.id) === variantId;
+};
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
@@ -67,12 +73,21 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   }, [items]);
 
-  const addItem = (product: Product, cutPreference?: string) => {
+  const addItem = (
+    product: Product,
+    cutPreference?: string,
+    variant?: ProductVariant
+  ) => {
+    const chosenVariant = variant || product.variants[0];
+    const variantId = chosenVariant?.id;
+
     setItems((prev) => {
-      const existing = prev.find((item) => item.product.id === product.id);
+      const existing = prev.find((item) =>
+        matchesCartItem(item, product.id, variantId)
+      );
       if (existing) {
         return prev.map((item) =>
-          item.product.id === product.id
+          matchesCartItem(item, product.id, variantId)
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
@@ -83,21 +98,28 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           product,
           quantity: 1,
           selectedCutPreference: cutPreference || "Store Master Cut (Fresh Today)",
+          selectedVariant: chosenVariant,
         },
       ];
     });
     setIsCartOpen(true);
   };
 
-  const removeItem = (productId: string) => {
-    setItems((prev) => prev.filter((item) => item.product.id !== productId));
+  const removeItem = (productId: string, variantId?: string) => {
+    setItems((prev) =>
+      prev.filter((item) => !matchesCartItem(item, productId, variantId))
+    );
   };
 
-  const updateQuantity = (productId: string, delta: number) => {
+  const updateQuantity = (
+    productId: string,
+    delta: number,
+    variantId?: string
+  ) => {
     setItems((prev) => {
       return prev
         .map((item) => {
-          if (item.product.id === productId) {
+          if (matchesCartItem(item, productId, variantId)) {
             const newQty = item.quantity + delta;
             return newQty > 0 ? { ...item, quantity: newQty } : null;
           }
@@ -112,10 +134,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   };
 
   const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
-  const subtotal = items.reduce(
-    (acc, item) => acc + item.product.price * item.quantity,
-    0
-  );
+  const subtotal = items.reduce((acc, item) => {
+    const unitPrice = item.selectedVariant?.price ?? item.product.price;
+    return acc + unitPrice * item.quantity;
+  }, 0);
 
   const freeDeliveryThreshold = 299;
   const deliveryFee = subtotal >= freeDeliveryThreshold || subtotal === 0 ? 0 : 29;

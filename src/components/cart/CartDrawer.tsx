@@ -185,9 +185,15 @@ export function CartDrawer() {
         ) : (
           // List of items
           <div className="flex-1 overflow-y-auto p-4 space-y-3">
-            {items.map(({ product, quantity, selectedCutPreference }) => (
+            {items.map(({ product, quantity, selectedCutPreference, selectedVariant }) => {
+              const unitPrice = selectedVariant?.price ?? product.price;
+              const unitOrigPrice = selectedVariant?.originalPrice ?? product.originalPrice;
+              const unitWeight = selectedVariant?.netWeight ?? product.netWeight;
+              const variantId = selectedVariant?.id;
+
+              return (
               <div
-                key={product.id}
+                key={`${product.id}-${variantId || "default"}`}
                 className="p-3 rounded-2xl bg-white border border-gray-200 shadow-xs flex gap-3 items-center"
               >
                 <img
@@ -199,14 +205,14 @@ export function CartDrawer() {
                 <div className="flex-1 min-w-0">
                   <h4 className="font-bold text-xs text-gray-900 truncate">{product.name}</h4>
                   <p className="text-[11px] text-gray-500">
-                    Net: {product.netWeight} • {selectedCutPreference || "Store Master Cut"}
+                    Net: {unitWeight} • {selectedCutPreference || "Store Master Cut"}
                   </p>
                   <div className="flex items-center gap-2 mt-1">
                     <span className="font-black text-xs text-gray-900">
-                      ₹{product.price * quantity}
+                      ₹{unitPrice * quantity}
                     </span>
                     <span className="text-[10px] text-gray-400 line-through">
-                      ₹{product.originalPrice * quantity}
+                      ₹{unitOrigPrice * quantity}
                     </span>
                   </div>
                 </div>
@@ -215,7 +221,7 @@ export function CartDrawer() {
                 <div className="flex flex-col items-end gap-1 shrink-0">
                   <div className="flex items-center bg-gray-100 rounded-lg p-0.5 border border-gray-200">
                     <button
-                      onClick={() => updateQuantity(product.id, -1)}
+                      onClick={() => updateQuantity(product.id, -1, variantId)}
                       className="w-6 h-6 rounded flex items-center justify-center text-gray-700 hover:bg-white transition-colors cursor-pointer"
                     >
                       <Minus className="w-3 h-3" />
@@ -224,14 +230,14 @@ export function CartDrawer() {
                       {quantity}
                     </span>
                     <button
-                      onClick={() => updateQuantity(product.id, 1)}
+                      onClick={() => updateQuantity(product.id, 1, variantId)}
                       className="w-6 h-6 rounded flex items-center justify-center text-gray-700 hover:bg-white transition-colors cursor-pointer"
                     >
                       <Plus className="w-3 h-3" />
                     </button>
                   </div>
                   <button
-                    onClick={() => removeItem(product.id)}
+                    onClick={() => removeItem(product.id, variantId)}
                     className="text-gray-400 hover:text-red-600 p-1 transition-colors cursor-pointer"
                     title="Remove item"
                   >
@@ -239,7 +245,8 @@ export function CartDrawer() {
                   </button>
                 </div>
               </div>
-            ))}
+              );
+            })}
 
             {/* Promo Code Input */}
             <div className="pt-2">

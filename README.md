@@ -20,6 +20,19 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Vendor Test on Vercel Preview
+
+`/vendor-test` and `/api/v1/vendor/auth/dev-test-login` are enabled on Vercel Preview only when `ENABLE_DEV_TEST_VENDOR=true`. Vercel sets `VERCEL_ENV` automatically; do not set it manually. Keep the flag unset or `false` in Production.
+
+For separate frontend and backend Vercel projects, configure these variables in the **Preview** environment:
+
+- **Frontend:** `ENABLE_DEV_TEST_VENDOR=true` and `NEXT_PUBLIC_API_URL` pointing to the matching Preview backend.
+- **Backend:** `ENABLE_DEV_TEST_VENDOR=true`, `TEST_VENDOR_EMAIL`, `TEST_VENDOR_PASSWORD`, `MONGODB_URI`, `MONGODB_DB_NAME`, `DEV_TEST_VENDOR_DB_NAME`, `PRODUCTION_MONGODB_DB_NAME`, and `ALLOWED_ORIGINS`.
+
+Use a dedicated Preview MongoDB database and credentials: `MONGODB_DB_NAME` must equal `DEV_TEST_VENDOR_DB_NAME`, and that name must differ from `PRODUCTION_MONGODB_DB_NAME`. Provision the Vendor Test account in that Preview database. Set `ALLOWED_ORIGINS` to the exact Preview frontend origin so the login request and session cookie work across the two deployments. Do not expose test credentials through `NEXT_PUBLIC_` variables or client code.
+
+For local development, the page remains available; the login endpoint additionally requires `ENABLE_DEV_TEST_VENDOR=true`, a provisioned test account, and the test credentials. Production remains disabled regardless of `NODE_ENV`.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

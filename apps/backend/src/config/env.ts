@@ -18,7 +18,9 @@ const serverEnvSchema = z.object({
     .enum(["development", "production", "test"])
     .default("development"),
   MONGODB_DNS_FALLBACK: z.enum(["true", "false"]).optional(),
-  ALLOWED_ORIGINS: z.string().default("http://localhost:3000"),
+  ALLOWED_ORIGINS: z
+    .string()
+    .default("http://localhost:3000,https://x-chicken.vercel.app"),
 });
 
 export type ServerEnv = z.infer<typeof serverEnvSchema>;
@@ -38,7 +40,9 @@ export function isMongoConfigured(): boolean {
 
 export function getAllowedOrigins(): string[] {
   assertServerSide();
-  const raw = process.env.ALLOWED_ORIGINS || "http://localhost:3000";
+  const raw =
+    process.env.ALLOWED_ORIGINS ||
+    "http://localhost:3000,https://x-chicken.vercel.app";
   return raw
     .split(",")
     .map((o) => o.trim().replace(/\/+$/, ""))
@@ -54,7 +58,9 @@ export function getServerEnv(): ServerEnv {
     MONGODB_DB_NAME: process.env.MONGODB_DB_NAME || "x_chicken",
     NODE_ENV: process.env.NODE_ENV,
     MONGODB_DNS_FALLBACK: process.env.MONGODB_DNS_FALLBACK,
-    ALLOWED_ORIGINS: process.env.ALLOWED_ORIGINS || "http://localhost:3000",
+    ALLOWED_ORIGINS:
+      process.env.ALLOWED_ORIGINS ||
+      "http://localhost:3000,https://x-chicken.vercel.app",
   });
 
   if (!parsed.success) {
